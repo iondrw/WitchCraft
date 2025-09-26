@@ -24,34 +24,22 @@ class _ListPageState extends State<ListPage> {
     final matches = favorits.where((item) => item.title == itemName);
     ItemData? parentItem = matches.isEmpty ? null : matches.first;
 
-    // 2. Ejecutar la lógica de modificación
-
     if (tool.favorit) {
-      // ---- LÓGICA: MARCAR COMO FAVORITO (AÑADIR) ----
-
       if (parentItem == null) {
-        // El contenedor NO existe en 'favorits'. Lo clonamos y lo añadimos.
         var newItem = widget.item.clone();
 
-        // Limpiamos y añadimos solo la herramienta favorita actual
         newItem.info.clear();
         newItem.info.add(tool);
 
         favorits.add(newItem);
       } else {
-        // El contenedor SÍ existe. Añadimos el sub-ítem si no está ya.
         if (!parentItem.info.contains(tool)) {
           parentItem.info.add(tool);
         }
       }
     } else {
-      // ---- LÓGICA: DESMARCAR COMO FAVORITO (QUITAR) ----
-
       if (parentItem != null) {
-        // Quita la herramienta específica de la sub-lista 'info'
         parentItem.info.remove(tool);
-
-        // Opcional: Si la sub-lista se vacía, quita el contenedor principal.
         if (parentItem.info.isEmpty) {
           favorits.remove(parentItem);
         }
@@ -65,7 +53,6 @@ class _ListPageState extends State<ListPage> {
       appBar: AppBar(title: Text(widget.item.title)),
       body: Column(
         children: [
-          // Section for the description and image
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Card(
@@ -90,7 +77,6 @@ class _ListPageState extends State<ListPage> {
             ),
           ),
           const SizedBox(height: 10),
-          // The GenericGrid will take the remaining space
           Expanded(
             child: GenericGrid<Tool>(
               items: widget.item.info,

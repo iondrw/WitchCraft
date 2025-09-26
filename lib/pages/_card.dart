@@ -46,13 +46,11 @@ class _CardPageState extends State<CardPage> {
                   ),
                   Text(widget.card.description),
                   const SizedBox(height: 10),
-                  // Muestra las notas existentes
                   if (widget.card.notes.isNotEmpty)
                     ...widget.card.notes.map(
                       (note) => ListTile(title: Text(note)),
                     ),
                   const SizedBox(height: 10),
-                  // Campo de texto para añadir nuevas notas
                   TextField(
                     controller: _notesController,
                     decoration: InputDecoration(
