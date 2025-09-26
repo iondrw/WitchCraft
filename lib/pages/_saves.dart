@@ -11,6 +11,14 @@ class SavePage extends StatefulWidget {
 }
 
 class _SavePageState extends State<SavePage> {
+  final bool IsFavorite = false;
+  Icon favoriteSelected(bool favorite) {
+    if (favorite == false) {
+      return Icon(Icons.favorite_border);
+    }
+    return Icon(Icons.favorite);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,12 +42,25 @@ class _SavePageState extends State<SavePage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Tirada guardada',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Tirada guardada',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    IsFavorite != IsFavorite;
+                                  });
+                                },
+                                icon: favoriteSelected(IsFavorite),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 10),
                           Row(

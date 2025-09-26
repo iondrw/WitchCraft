@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:witchcraft/pages/_deck.dart';
 import 'package:witchcraft/models/button.dart';
-import 'package:witchcraft/pages/_symbology.dart';
-import 'package:witchcraft/pages/_numerology.dart';
+import 'package:witchcraft/pages/_more_tools.dart';
+import 'package:witchcraft/pages/_protections.dart';
 import 'package:witchcraft/widgets/generic_grid.dart';
 import 'package:witchcraft/widgets/image_button.dart';
 
@@ -16,19 +15,14 @@ class MoreInfoPage extends StatefulWidget {
 class _MoreInfoPageState extends State<MoreInfoPage> {
   final List<ButtonData> accesos = [
     ButtonData(
-      imagePath: 'assets/tarot.jpg',
-      title: 'Tarot',
-      destination: const DeckPage(),
+      imagePath: 'assets/protections.jpg',
+      title: 'Protecciones',
+      destination: const ProtectionsPage(),
     ),
     ButtonData(
-      imagePath: 'assets/Symbology.jpg',
-      title: 'Simbología',
-      destination: const SymbologyPage(),
-    ),
-    ButtonData(
-      imagePath: 'assets/Numerology.jpg',
-      title: 'Numerología',
-      destination: const NumerologyPage(),
+      imagePath: 'assets/moreTools.jpg',
+      title: 'Otras herramientas',
+      destination: const MoreToolsPage(),
     ),
   ];
 
@@ -37,7 +31,7 @@ class _MoreInfoPageState extends State<MoreInfoPage> {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.only(top: 200, left: 20, right: 20),
           child: GenericGrid<ButtonData>(
             crossAxisCount: 2,
             childAspectRatio: 1.0,

@@ -2,9 +2,9 @@ class Tool {
   final String imagePath;
   final String title;
   final String description;
-  final bool favorit; // Ahora es final
+  bool favorit;
 
-  const Tool({
+  Tool({
     required this.imagePath,
     required this.title,
     required this.description,

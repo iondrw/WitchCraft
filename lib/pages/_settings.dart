@@ -12,6 +12,20 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text('Configuración')));
+    return Scaffold(
+      appBar: AppBar(title: Text('Configuración')),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: ElevatedButton(
+        onPressed: () {},
+        style: ButtonStyle(
+          maximumSize: WidgetStatePropertyAll(Size(150, 50)),
+          minimumSize: WidgetStatePropertyAll(Size(150, 50)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [Icon(Icons.info), SizedBox(width: 5), Text('App Info')],
+        ),
+      ),
+    );
   }
 }

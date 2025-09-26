@@ -3,28 +3,29 @@ import 'package:witchcraft/models/tool.dart';
 import 'package:witchcraft/pages/_info_page.dart';
 import 'package:witchcraft/widgets/generic_grid.dart';
 
-class NumerologyPage extends StatefulWidget {
-  const NumerologyPage({super.key});
+class MoreToolsPage extends StatefulWidget {
+  const MoreToolsPage({super.key});
 
   @override
-  State<NumerologyPage> createState() => _NumerologyPageState();
+  State<MoreToolsPage> createState() => _MoreToolsPageState();
 }
 
-final List<Tool> numerology = [
+final List<Tool> typeTools = [
   Tool(
-    imagePath: 'assets/uno.jpg',
-    title: '1',
-    description: 'simboliza la unidad, la individualidad y el liderazgo',
+    imagePath: 'assets/pendulo.jpg',
+    title: 'Pendulo',
+    description:
+        ' es una herramienta de adivinación que se usa para obtener respuestas intuitivas, conectar con el subconsciente, la energía sutil o el "Yo Superior". ',
   ),
 ];
 
-class _NumerologyPageState extends State<NumerologyPage> {
+class _MoreToolsPageState extends State<MoreToolsPage> {
   int currentPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Numerología')),
+      appBar: AppBar(title: Text('Herramientas')),
       body: Column(
         children: [
           // Section for the description and image
@@ -35,7 +36,7 @@ class _NumerologyPageState extends State<NumerologyPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset(
-                    'assets/Numerology.jpg',
+                    'assets/moreTools.jpg',
                     width: 100,
                     height: 100,
                     fit: BoxFit.cover,
@@ -43,7 +44,7 @@ class _NumerologyPageState extends State<NumerologyPage> {
                   const SizedBox(width: 16),
                   Expanded(
                     child: Text(
-                      'La numerología en la brujería se basa en la creencia de que los números tienen significados espirituales y mágicos, utilizándose para diversas prácticas como elegir un nombre de oficio de bruja, potenciar hechizos a través de secuencias numéricas (códigos sagrados) o para entender el propósito del alma y la evolución personal.',
+                      ' Además del tarot existen otras herramientas en el mundo espiritual, estas actúan como intermediarios para acceder a una mayor sabiduría, recibir guía espiritual y conectar con niveles más profundos de la intuición y la conciencia.',
                       style: const TextStyle(fontSize: 16),
                     ),
                   ),
@@ -55,14 +56,14 @@ class _NumerologyPageState extends State<NumerologyPage> {
           // The GenericGrid will take the remaining space
           Expanded(
             child: GenericGrid<Tool>(
-              items: numerology,
-              builder: (tool) {
+              items: typeTools,
+              builder: (item) {
                 return InkWell(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => InfoPage(tool: tool),
+                        builder: (context) => InfoPage(tool: item),
                       ),
                     );
                   },
@@ -72,12 +73,12 @@ class _NumerologyPageState extends State<NumerologyPage> {
                     child: Column(
                       children: [
                         Expanded(
-                          child: Image.asset(tool.imagePath, fit: BoxFit.cover),
+                          child: Image.asset(item.imagePath, fit: BoxFit.cover),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            tool.title,
+                            item.title,
                             style: const TextStyle(fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),

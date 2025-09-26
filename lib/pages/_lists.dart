@@ -1,30 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:witchcraft/models/item.dart';
 import 'package:witchcraft/models/tool.dart';
+import 'package:witchcraft/pages/_favorits.dart';
 import 'package:witchcraft/pages/_info_page.dart';
 import 'package:witchcraft/widgets/generic_grid.dart';
 
-class NumerologyPage extends StatefulWidget {
-  const NumerologyPage({super.key});
-
+class ListPage extends StatefulWidget {
+  final ItemData item;
+  const ListPage({super.key, required this.item});
   @override
-  State<NumerologyPage> createState() => _NumerologyPageState();
+  State<ListPage> createState() => _ListPageState();
 }
 
-final List<Tool> numerology = [
-  Tool(
-    imagePath: 'assets/uno.jpg',
-    title: '1',
-    description: 'simboliza la unidad, la individualidad y el liderazgo',
-  ),
-];
+class _ListPageState extends State<ListPage> {
+  Icon favoriteSelected(bool favorite) {
+    if (favorite == false) {
+      return Icon(Icons.favorite_border);
+    }
+    return Icon(Icons.favorite);
+  }
 
-class _NumerologyPageState extends State<NumerologyPage> {
-  int currentPageIndex = 0;
+  void isFavorite(Tool tool, String itemName) {
+    final matches = favorits.where((item) => item.title == itemName);
+    ItemData? parentItem = matches.isEmpty ? null : matches.first;
+
+    // 2. Ejecutar la lógica de modificación
+
+    if (tool.favorit) {
+      // ---- LÓGICA: MARCAR COMO FAVORITO (AÑADIR) ----
+
+      if (parentItem == null) {
+        // El contenedor NO existe en 'favorits'. Lo clonamos y lo añadimos.
+        var newItem = widget.item.clone();
+
+        // Limpiamos y añadimos solo la herramienta favorita actual
+        newItem.info.clear();
+        newItem.info.add(tool);
+
+        favorits.add(newItem);
+      } else {
+        // El contenedor SÍ existe. Añadimos el sub-ítem si no está ya.
+        if (!parentItem.info.contains(tool)) {
+          parentItem.info.add(tool);
+        }
+      }
+    } else {
+      // ---- LÓGICA: DESMARCAR COMO FAVORITO (QUITAR) ----
+
+      if (parentItem != null) {
+        // Quita la herramienta específica de la sub-lista 'info'
+        parentItem.info.remove(tool);
+
+        // Opcional: Si la sub-lista se vacía, quita el contenedor principal.
+        if (parentItem.info.isEmpty) {
+          favorits.remove(parentItem);
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Numerología')),
+      appBar: AppBar(title: Text(widget.item.title)),
       body: Column(
         children: [
           // Section for the description and image
@@ -35,7 +73,7 @@ class _NumerologyPageState extends State<NumerologyPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset(
-                    'assets/Numerology.jpg',
+                    widget.item.imagePath,
                     width: 100,
                     height: 100,
                     fit: BoxFit.cover,
@@ -43,7 +81,7 @@ class _NumerologyPageState extends State<NumerologyPage> {
                   const SizedBox(width: 16),
                   Expanded(
                     child: Text(
-                      'La numerología en la brujería se basa en la creencia de que los números tienen significados espirituales y mágicos, utilizándose para diversas prácticas como elegir un nombre de oficio de bruja, potenciar hechizos a través de secuencias numéricas (códigos sagrados) o para entender el propósito del alma y la evolución personal.',
+                      widget.item.description,
                       style: const TextStyle(fontSize: 16),
                     ),
                   ),
@@ -55,7 +93,7 @@ class _NumerologyPageState extends State<NumerologyPage> {
           // The GenericGrid will take the remaining space
           Expanded(
             child: GenericGrid<Tool>(
-              items: numerology,
+              items: widget.item.info,
               builder: (tool) {
                 return InkWell(
                   onTap: () {
@@ -81,6 +119,15 @@ class _NumerologyPageState extends State<NumerologyPage> {
                             style: const TextStyle(fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              tool.favorit = !tool.favorit;
+                              isFavorite(tool, widget.item.title);
+                            });
+                          },
+                          icon: favoriteSelected(tool.favorit),
                         ),
                       ],
                     ),

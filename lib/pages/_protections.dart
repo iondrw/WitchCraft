@@ -1,30 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:witchcraft/models/item.dart';
 import 'package:witchcraft/models/tool.dart';
-import 'package:witchcraft/pages/_info_page.dart';
+import 'package:witchcraft/pages/_lists.dart';
 import 'package:witchcraft/widgets/generic_grid.dart';
 
-class NumerologyPage extends StatefulWidget {
-  const NumerologyPage({super.key});
+class ProtectionsPage extends StatefulWidget {
+  const ProtectionsPage({super.key});
 
   @override
-  State<NumerologyPage> createState() => _NumerologyPageState();
+  State<ProtectionsPage> createState() => _ProtectionsPageState();
 }
 
-final List<Tool> numerology = [
-  Tool(
-    imagePath: 'assets/uno.jpg',
-    title: '1',
-    description: 'simboliza la unidad, la individualidad y el liderazgo',
+final List<ItemData> typeProtections = [
+  ItemData(
+    initialInfo: [
+      Tool(
+        imagePath: 'assets/ojo.jpg',
+        title: 'Ojo turco',
+        description:
+            'Es un amuleto o talismán con forma de gota que representa un ojo, utilizado para proteger contra el mal de ojo y las malas energías. Proviene de Turquía y sus creencias se remontan a la antigüedad, creyéndose que actúa como un espejo que desvía la envidia y las intenciones negativas.',
+      ),
+    ],
+    imagePath: 'assets/talisman.jpg',
+    title: 'Talismanes',
+    description:
+        'Objeto cargado de energía, a menudo con inscripciones o símbolos, que se cree tiene poderes mágicos para resguardar al portador de daños, desgracias o malas influencias, actuando como un guardián contra lo negativo. ',
   ),
 ];
 
-class _NumerologyPageState extends State<NumerologyPage> {
+class _ProtectionsPageState extends State<ProtectionsPage> {
   int currentPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Numerología')),
+      appBar: AppBar(title: Text('Protecciones')),
       body: Column(
         children: [
           // Section for the description and image
@@ -35,7 +45,7 @@ class _NumerologyPageState extends State<NumerologyPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset(
-                    'assets/Numerology.jpg',
+                    'assets/protections.jpg',
                     width: 100,
                     height: 100,
                     fit: BoxFit.cover,
@@ -43,7 +53,7 @@ class _NumerologyPageState extends State<NumerologyPage> {
                   const SizedBox(width: 16),
                   Expanded(
                     child: Text(
-                      'La numerología en la brujería se basa en la creencia de que los números tienen significados espirituales y mágicos, utilizándose para diversas prácticas como elegir un nombre de oficio de bruja, potenciar hechizos a través de secuencias numéricas (códigos sagrados) o para entender el propósito del alma y la evolución personal.',
+                      'Prácticas, creencias o amuletos que buscan resguardar el bienestar emocional y espiritual de las personas de las energías o influencias negativas.',
                       style: const TextStyle(fontSize: 16),
                     ),
                   ),
@@ -54,15 +64,15 @@ class _NumerologyPageState extends State<NumerologyPage> {
           const SizedBox(height: 10),
           // The GenericGrid will take the remaining space
           Expanded(
-            child: GenericGrid<Tool>(
-              items: numerology,
-              builder: (tool) {
+            child: GenericGrid<ItemData>(
+              items: typeProtections,
+              builder: (item) {
                 return InkWell(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => InfoPage(tool: tool),
+                        builder: (context) => ListPage(item: item),
                       ),
                     );
                   },
@@ -72,12 +82,12 @@ class _NumerologyPageState extends State<NumerologyPage> {
                     child: Column(
                       children: [
                         Expanded(
-                          child: Image.asset(tool.imagePath, fit: BoxFit.cover),
+                          child: Image.asset(item.imagePath, fit: BoxFit.cover),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            tool.title,
+                            item.title,
                             style: const TextStyle(fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),

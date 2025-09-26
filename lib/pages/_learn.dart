@@ -37,7 +37,7 @@ class _LearnPageState extends State<LearnPage> {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.only(top: 60, left: 20, right: 20),
           child: GenericGrid<ButtonData>(
             crossAxisCount: 2,
             childAspectRatio: 1.0,

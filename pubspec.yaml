@@ -99,6 +99,14 @@ flutter:
    - assets/tarot.jpg
    - assets/Symbology.jpg
    - assets/Numerology.jpg
+   - assets/moreTools.jpg
+   - assets/protections.jpg
+   - assets/elements.jpg
+   - assets/water.jpg
+   - assets/uno.jpg
+   - assets/talisman.jpg
+   - assets/ojo.jpg
+   - assets/pendulo.jpg
    # Tarot Rider - Waite
    #Arcanes
    - assets/Rider_Waite_Tarot/Fool.jpg
