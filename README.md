@@ -22,19 +22,17 @@ La aplicación corresponde a una aplicación cross - platform que ofrece un acer
 https://youtu.be/JVOjZFgYJS0
 
 ## Diagrama de Pantallas
-```
-mindmap
-((HomePage))
-  Leer tarot
-    Guardados
-  Fase lunar
-    Rituales
-    Contras
-    Recomendaciones
-  favoritos
-  Aprender
-    Baraja
-      Carta
-    Simbología
-
+```mermaid
+flowchart TD
+    A[HomePage] --> B[Leer tarot]
+    B --> B1[Guardados]
+    A --> C[Fase lunar]
+    C --> C1[Rituales]
+    C --> C2[Contras]
+    C --> C3[Recomendaciones]
+    A --> D[favoritos]
+    A --> E[Aprender]
+    E --> E1[Baraja]
+    E1 --> E1a[Carta]
+    E --> E2[Simbología]
 
