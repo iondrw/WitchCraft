@@ -22,7 +22,8 @@ La aplicación corresponde a una aplicación cross - platform que ofrece un acer
 https://youtu.be/JVOjZFgYJS0
 
 ## Diagrama de Pantallas
-```mindmap
+```
+mindmap
 ((HomePage))
   Leer tarot
     Guardados
